@@ -1,5 +1,3 @@
-// ./src/components/common/ErrorBoundary.js
-
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors, Fonts, GlobalStyles } from '../../styles/globalStyles';

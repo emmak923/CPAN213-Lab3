@@ -1,5 +1,3 @@
-// ./src/screens/ContactDetails/ContactDetailsScreen.tsx
-
 import React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { useContacts } from '../../utils/ContactContext';
@@ -10,6 +8,7 @@ import {
   GlobalStyles,
 } from '../../styles/globalStyles';
 import { formatContactName } from '../../data/contactData';
+import { TouchableOpacity } from 'react-native';
 
 const ContactDetailsScreen = ({ route, navigation }) => {
   const { contactId } = route.params;
@@ -54,6 +53,13 @@ const ContactDetailsScreen = ({ route, navigation }) => {
 
       <Text style={styles.infoLabel}>Notes</Text>
       <Text style={styles.infoText}>{contact.notes || '—'}</Text>
+
+      <TouchableOpacity
+        style={styles.editButton}
+        onPress={() => navigation.navigate('AddContact', { contact })}
+      >
+        <Text style={styles.editButtonText}>Edit Contact</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -100,6 +106,20 @@ const styles = StyleSheet.create({
   notFound: {
     fontSize: Fonts.medium,
     color: Colors.text.secondary,
+  },
+  editButton: {
+    marginTop: Spacing.lg,
+    backgroundColor: Colors.primary,
+    paddingVertical: Spacing.sm,
+    paddingHorizontal: Spacing.lg,
+    borderRadius: 8,
+    alignSelf: 'center',
+  },
+
+  editButtonText: {
+    color: Colors.text.light,
+    fontSize: Fonts.medium,
+    fontWeight: 'bold',
   },
 });
 
