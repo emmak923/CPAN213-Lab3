@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useContacts } from '../../utils/ContactContext';
 import {
   Colors,
@@ -8,11 +8,11 @@ import {
   GlobalStyles,
 } from '../../styles/globalStyles';
 import { formatContactName } from '../../data/contactData';
-import { TouchableOpacity } from 'react-native';
+import CustomButton from '../../components/common/CustomButton';
 
 const ContactDetailsScreen = ({ route, navigation }) => {
   const { contactId } = route.params;
-  const { contacts } = useContacts();
+  const { contacts, deleteContact } = useContacts();
 
   const contact = contacts.find(c => c.id === contactId);
 
@@ -23,6 +23,25 @@ const ContactDetailsScreen = ({ route, navigation }) => {
       </View>
     );
   }
+
+  const handleDelete = () => {
+    Alert.alert(
+      'Delete Contact',
+      'Are you sure you want to delete this contact?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          onPress: () => {
+            deleteContact(contactId);
+            navigation.goBack();
+          },
+          style: 'destructive',
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
   const fullName = formatContactName(contact);
 
@@ -54,12 +73,21 @@ const ContactDetailsScreen = ({ route, navigation }) => {
       <Text style={styles.infoLabel}>Notes</Text>
       <Text style={styles.infoText}>{contact.notes || '—'}</Text>
 
-      <TouchableOpacity
-        style={styles.editButton}
+      <CustomButton
+        title="Edit Contact"
         onPress={() => navigation.navigate('AddContact', { contact })}
-      >
-        <Text style={styles.editButtonText}>Edit Contact</Text>
-      </TouchableOpacity>
+        style={styles.editButton}
+      />
+      <CustomButton
+        title="Delete Contact"
+        onPress={handleDelete}
+        style={styles.deleteButton}
+      />
+      <CustomButton
+        title="Go Back"
+        onPress={() => navigation.goBack()}
+        style={styles.backButton}
+      />
     </ScrollView>
   );
 };
@@ -109,17 +137,14 @@ const styles = StyleSheet.create({
   },
   editButton: {
     marginTop: Spacing.lg,
-    backgroundColor: Colors.primary,
-    paddingVertical: Spacing.sm,
-    paddingHorizontal: Spacing.lg,
-    borderRadius: 8,
-    alignSelf: 'center',
   },
-
-  editButtonText: {
-    color: Colors.text.light,
-    fontSize: Fonts.medium,
-    fontWeight: 'bold',
+  deleteButton: {
+    marginTop: Spacing.md,
+    backgroundColor: Colors.danger,
+  },
+  backButton: {
+    marginTop: Spacing.md,
+    backgroundColor: Colors.secondary,
   },
 });
 
