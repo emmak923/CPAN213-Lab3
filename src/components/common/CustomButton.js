@@ -7,16 +7,8 @@ import {
 } from 'react-native';
 import { Colors, Fonts, Spacing } from '../../styles/globalStyles';
 
-type CustomButtonProps = {
-  title: string,
-  onPress: () => void,
-  disabled?: boolean,
-  loading?: boolean,
-  style?: object,
-  textStyle?: object,
-};
-
-const CustomButton: React.FC<CustomButtonProps> = ({
+// set common button styles and behavior
+const CustomButton = ({
   title,
   onPress,
   disabled = false,

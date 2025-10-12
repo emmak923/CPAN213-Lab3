@@ -18,6 +18,7 @@ import { formatContactName } from '../../data/contactData';
 
 const { width } = Dimensions.get('window');
 
+// memoize contact list item to prevent unnecessary re-renders
 const ContactListItem = memo(
   ({ contact, onPress, onFavoritePress, onCallPress, onMessagePress }) => {
     const fullName = formatContactName(contact);

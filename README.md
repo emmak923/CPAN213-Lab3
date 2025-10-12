@@ -5,7 +5,7 @@
 - **Name:** Ema Maeda
 - **Student ID:** N01678730
 - **Course:** CPAN 213
-- **Lab:** Lab 4
+- **Lab:** Lab 3
 - **Date:** October 16, 2025
 
 ## Project Description

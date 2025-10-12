@@ -11,6 +11,7 @@ import { formatContactName } from '../../data/contactData';
 import CustomButton from '../../components/common/CustomButton';
 
 const ContactDetailsScreen = ({ route, navigation }) => {
+  // receive contactId from route params
   const { contactId } = route.params;
   const { contacts, deleteContact } = useContacts();
 
@@ -39,7 +40,7 @@ const ContactDetailsScreen = ({ route, navigation }) => {
           style: 'destructive',
         },
       ],
-      { cancelable: true }
+      { cancelable: true },
     );
   };
 
@@ -53,8 +54,9 @@ const ContactDetailsScreen = ({ route, navigation }) => {
         ) : (
           <View style={[styles.avatar, styles.avatarPlaceholder]}>
             <Text style={styles.initials}>
-              {contact.firstName[0]}
-              {contact.lastName[0]}
+              {contact.firstName && contact.lastName
+                ? `${contact.firstName[0]}${contact.lastName[0]}`
+                : ''}
             </Text>
           </View>
         )}

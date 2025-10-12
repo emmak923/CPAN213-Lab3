@@ -8,6 +8,7 @@ class ErrorBoundary extends React.Component {
     this.state = { hasError: false, error: null };
   }
 
+  // when an error is thrown in a child component, this methods is called
   static getDerivedStateFromError(error) {
     return { hasError: true, error };
   }

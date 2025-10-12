@@ -16,6 +16,8 @@ import { Colors, Spacing, GlobalStyles } from '../../styles/globalStyles';
 
 const AddContactScreen = ({ navigation, route }) => {
   const { addContact, updateContact } = useContacts();
+  // if route exists, check if params exist, then get contact inside params
+  // if some of these are undefined, isEdit and existingContact will be undefined
   const isEdit = route?.params?.contact;
   const existingContact = route?.params?.contact;
 
@@ -32,6 +34,7 @@ const AddContactScreen = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
 
   // Form refs for navigation
+  // focus next input automatically
   const lastNameRef = useRef();
   const emailRef = useRef();
   const phoneRef = useRef();

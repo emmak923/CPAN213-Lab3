@@ -15,6 +15,7 @@ import {
   GlobalStyles,
 } from '../../styles/globalStyles';
 
+// forward ref so parent can control the TextInput (focus, clear, etc.)
 const CustomInput = forwardRef(
   (
     {
@@ -45,6 +46,7 @@ const CustomInput = forwardRef(
       }).start();
     };
 
+    // when the input loses focus
     const handleBlur = () => {
       setFocused(false);
       if (!value) {
@@ -120,8 +122,7 @@ const CustomInput = forwardRef(
             accessibilityHint={
               error
                 ? `${label} field has an error: ${error}`
-                : `${label} 
-input field`
+                : `${label} input field`
             }
             {...props}
           />
